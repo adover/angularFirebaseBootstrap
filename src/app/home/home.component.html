@@ -1,0 +1,33 @@
+<section class="homePage">
+    <article class="group" *ngFor="let group of groups">
+        <header class="group-header">
+            <h2>Group name</h2>
+        </header>
+        <div class="group-content">
+            <p>You owe:</p>
+            <h3>$20</h3>
+            <p>Payable by
+                <span class="font-weight-bold">Tuesday</span>
+            </p>
+        </div>
+        <footer class="group-footer">
+            <nav>
+                <ul>
+                    <li>
+                        <a routerLink="">Add an expense</a>
+                    </li>
+                    <li>
+                        <a routerLink="">Add a payment/mark paid</a>
+                    </li>
+                    <li>
+                        <a routerLink="">More info</a>
+                    </li>
+                </ul>
+            </nav>
+        </footer>
+    </article>
+    <div class="nogroups">
+        <h2>You're not a member of any groups yet!</h2>
+        <button class="btn btn-primary">Create a group now</button>
+    </div>
+</section>
