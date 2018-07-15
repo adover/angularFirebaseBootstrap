@@ -1,22 +1,32 @@
-<section class="signup text-center">
-    <form action="" id="signupForm" [formGroup]="loginForm" (ngSubmit)="createWithCredentials()">
+<section class="signup container text-center">
+    <form action="" class="needs-validation" id="signupForm" [formGroup]="signupForm" (ngSubmit)="signupWithCredentials()" novalidate>
         <div class="form-group">
             <label for="">Name</label>
-            <input formControlName="name" placeholder="John Doe" type="text">
+            <input class="form-control form-control-lg" formControlName="name" placeholder="John Doe" type="text" [ngClass]="{'is-invalid': isInvalid('name', ['required'])}">
+            <div *ngIf="isInvalid('name', ['required'])" class="invalid-feedback">Name is required</div>
         </div>
         <div class="form-group">
             <label for="">Email</label>
-            <input formControlName="email" placeholder="bob@bob.com" type="text">
+            <input class="form-control form-control-lg" formControlName="email" placeholder="bob@bob.com" type="text" [ngClass]="{'is-invalid': isInvalid('email', ['required','email'])}">
+            <div *ngIf="isInvalid('email', ['required'])" class="invalid-feedback">Email is required</div>
+            <div *ngIf="isInvalid('email', ['email'])" class="invalid-feedback">Please supply a valid email</div>
         </div>
-        <div [formGroup]="passwordGroup"></div>
-        <div class="form-group">
-            <label for="">Password</label>
-            <input formControlName="password" type="password">
-        </div>
-        <div class="form-group">
-            <label for="">Confirm Password</label>
-            <input formControlName="confirmPassword" type="password">
-            <button class="btn btn-lg btn-block btn-primary" form="loginForm">Submit</button>
+        <div [formGroup]="passwordGroup">
+            <div class="form-group">
+                <label for="">Password</label>
+                <input class="form-control form-control-lg" formControlName="password" type="password" [ngClass]="{'is-invalid': isInvalid('password', ['required', 'minLength','maxLength'])}">
+                <div *ngIf="isInvalid('password', ['required'])" class="invalid-feedback">Password is required</div>
+                <div *ngIf="isInvalid('password', ['minLength'])" class="invalid-feedback">Password needs to be 6 characters</div>
+                <div *ngIf="isInvalid('password', ['maxLength'])" class="invalid-feedback">Password is too long</div>
+            </div>
+            <div class="form-group">
+                <label for="">Confirm Password</label>
+                <input class="form-control form-control-lg" formControlName="confirmPassword" type="password" [ngClass]="{'is-invalid': isInvalid('confirmPassword', ['required'])}">
+                <div *ngIf="signupForm.hasError('failedMatch','passwordGroup')" class="invalid-feedback">
+                    Password and confirm password do not match
+                </div>
+            </div>
+            <button class="btn btn-lg btn-block btn-primary" form="signupForm">Submit</button>
             <!-- <button class="btn btn-lg btn-block btn-secondary" (click)="signInWithFacebook()">Login with Facebook</button>
             <button class="btn btn-lg btn-block btn-secondary" (click)="signInWithGoogle()">Login with Google</button> -->
         </div>

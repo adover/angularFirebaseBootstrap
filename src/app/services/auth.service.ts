@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { Observable } from 'rxjs';
 import { CONSTANTS } from '../constants/app.constants';
 
 @Injectable({
@@ -18,7 +18,10 @@ export class AuthService {
         this.user = firebaseAuth.authState;
     }
 
-    isLoggedIn = () => Boolean(this.userDetails);
+    isLoggedIn = () => {
+        console.log(this.userDetails);
+        Boolean(this.userDetails);
+    }
 
     logout() {
         this.firebaseAuth.auth.signOut()

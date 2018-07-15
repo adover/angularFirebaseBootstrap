@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CONSTANTS } from '../constants/app.constants';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { FormValidationService } from '../services/form.validation.service';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
+    styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
 
-    constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) {
+    constructor(
+        private authService: AuthService,
+        private formBuilder: FormBuilder,
+        private formValidation: FormValidationService,
+        private router: Router
+    ) {
         const { required, email } = Validators;
 
         this.loginForm = this.formBuilder.group({
@@ -22,6 +28,8 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {}
+
+    isInvalid = (c: string, type: string[]): boolean => this.formValidation.isInvalid(this.loginForm, c, type);
 
     signInWithCredentials(email: string, password: string) {
 
