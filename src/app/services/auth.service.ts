@@ -28,7 +28,7 @@ export class AuthService {
         .then(res => this.router.navigate([CONSTANTS.loggedOutUrl]));
     }
 
-    signUpWithCredentials(email: string, password: string) {
+    signupWithCredentials(email: string, password: string) {
         return this.firebaseAuth.auth.createUserWithEmailAndPassword(email, password);
     }
 

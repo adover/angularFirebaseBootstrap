@@ -1,5 +1,5 @@
 <section class="signup container text-center">
-    <form action="" class="needs-validation" id="signupForm" [formGroup]="signupForm" (ngSubmit)="signupWithCredentials()" novalidate>
+    <form action="" class="needs-validation" id="signupForm" [formGroup]="signupForm" (ngSubmit)="onSubmit()" novalidate>
         <div class="form-group">
             <label for="">Name</label>
             <input class="form-control form-control-lg" formControlName="name" placeholder="John Doe" type="text" [ngClass]="{'is-invalid': isInvalid('name', ['required'])}">

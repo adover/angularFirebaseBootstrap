@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root',
@@ -16,5 +16,16 @@ export class FormValidationService {
             type.filter(t => f.controls[c].hasError(t) && f.controls[c].touched)
                 .length,
         );
+    }
+
+    validateAllFormFields(f: FormGroup) {
+        Object.keys(f.controls).forEach(field => {
+            const control = f.get(field);
+            if (control instanceof FormControl) {
+                control.markAsTouched({ onlySelf: true });
+            } else if (control instanceof FormGroup) {
+                this.validateAllFormFields(control);
+            }
+        });
     }
 }

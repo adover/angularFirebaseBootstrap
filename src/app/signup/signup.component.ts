@@ -47,8 +47,19 @@ export class SignupComponent implements OnInit {
         return this.formValidation.isInvalid(f, c, type);
     }
 
-    signupWithCredentials(email: string, password: string) {
-        console.log(email, password);
+    onSubmit() {
+        if (this.signupForm.valid) {
+            const name = this.signupForm.get('name').value;
+            const email = this.signupForm.get('email').value;
+            const password = this.passwordGroup.get('password').value;
+
+            this.authService.signupWithCredentials(email, password)
+                .catch(e => {
+                    console.log(e);
+                });
+        } else {
+            this.formValidation.validateAllFormFields(this.signupForm);
+        }
     }
 
     signInWithFacebook(): void {

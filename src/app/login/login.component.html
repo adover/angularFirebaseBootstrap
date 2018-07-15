@@ -3,7 +3,7 @@
         New here?
         <a routerLink="/signup">Sign up now</a>.
     </div>
-    <form action="" id="loginForm" [formGroup]="loginForm" (ngSubmit)="signInWithCredentials()">
+    <form action="" id="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="">Email address</label>
             <input class="form-control form-control-lg" formControlName="email" type="text" [ngClass]="{'is-invalid': isInvalid('email', ['required','email'])}">

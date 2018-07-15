@@ -31,8 +31,18 @@ export class LoginComponent implements OnInit {
 
     isInvalid = (c: string, type: string[]): boolean => this.formValidation.isInvalid(this.loginForm, c, type);
 
-    signInWithCredentials(email: string, password: string) {
+    onSubmit() {
+        if (this.loginForm.valid) {
+            const email = this.loginForm.get('email').value;
+            const password = this.loginForm.get('password').value;
 
+            this.authService.signInWithCredentials(email, password)
+                .catch(e => {
+                    console.log(e);
+                });
+        } else {
+            this.formValidation.validateAllFormFields(this.loginForm);
+        }
     }
 
     signInWithFacebook() {
